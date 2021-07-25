@@ -20,8 +20,7 @@ namespace Randomizer.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
-                               up.Email
+                        SELECT up.Id, up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName  
                           FROM UserProfile up
                          WHERE FirebaseUserId = @FirebaseuserId";
 
@@ -36,10 +35,10 @@ namespace Randomizer.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
-                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                            Email = DbUtils.GetString(reader, "Email"),
                         };
                     }
                     reader.Close();
@@ -56,14 +55,14 @@ namespace Randomizer.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, Email)
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, Email, DisplayName, FirstName, LastName)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, @Email)";
+                                        VALUES (@FirebaseUserId, @Email, @DisplayName, @FirstName, @LastName)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
@@ -78,7 +77,7 @@ namespace Randomizer.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, up.Email
+                        SELECT up.Id, up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName,  
                           FROM UserProfile up
                          WHERE Id = @Id";
 
@@ -93,10 +92,10 @@ namespace Randomizer.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             FirstName = DbUtils.GetString(reader, "FirstName"),
                             LastName = DbUtils.GetString(reader, "LastName"),
-                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                            Email = DbUtils.GetString(reader, "Email"),
                         };
                     }
                     reader.Close();
