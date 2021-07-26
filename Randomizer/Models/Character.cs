@@ -23,6 +23,9 @@ namespace Randomizer.Models
         public int AppearanceFeatureId { get; set; }
         public AppearanceFeature AppearanceFeature { get; set; }
 
+        public int AlignmentId { get; set; }
+        public Alignment Alignment { get; set; }
+
         public int InteractionTraitId { get; set; }
         public InteractionTrait InteractionTrait { get; set; }
 
