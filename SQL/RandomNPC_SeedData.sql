@@ -2,9 +2,8 @@
 INSERT INTO [UserProfile]
   ([Id], [FirebaseUserId], [Email], [DisplayName], [FirstName], [LastName])
 VALUES
-  (1, 'tptbKYVpE8Su0wDnCsUqW01S3xo2', 'ethan@me.com', 'Seaborg', 'Ethan', 'Mathis'),
-  (2, '7j4k8jajhAMoKiqrEkA2I9hg4qG3', 'foo@bar.com', 'Foob', 'Foo', 'Barington'),
-  (3, 'dg1tqmwfXkZeycGWKJiY7UXNWlg2', 'groucho@marx.com', 'Oscar', 'Groucho', 'Marx');
+  (5, '1OLa3ATuIeaOtIq7JSbDgHbbbDr2', 'ethan@me.com', 'thatOneGuy', 'Ethan', 'Mathis'),
+  (6, '4BT4CoZyzySQWqrlJfxOHKMZ2F22', 'ryan@me.com', 'Nerd', 'Ryan', 'Mathis');
 SET IDENTITY_INSERT [UserProfile] OFF
 
 
@@ -19,6 +18,7 @@ VALUES
   (5, 'Ragged, dirty clothes'),
   (6, 'Pronounced scar'),
   (7, 'Missing teeth'),
+  (8, 'Has a pet or familiar'),
   (9, 'Unusual eye color (or two different colors)'),
   (10, 'Tattoos'),
   (11, 'Birthmark'),

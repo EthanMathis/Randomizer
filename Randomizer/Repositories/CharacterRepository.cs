@@ -25,16 +25,18 @@ namespace Randomizer.Repositories
                                    c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
                                    up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName,
                                    g.Name AS GenderName, r.Name AS RaceName, af.Description AS AppearanceFeatureDescription,
-                                   it.Name AS InteractionTraitName, t.Description AS TalentDescription, m.Description AS MannerismDescription
+                                   a.Name AS AlignmentName, it.Name AS InteractionTraitName, 
+                                   t.Description AS TalentDescription, m.Description AS MannerismDescription
                             FROM Character c
                                    LEFT JOIN UserProfile up on up.Id = c.UserId
                                    LEFT JOIN Gender g on g.Id = c.GenderId
                                    LEFT JOIN Race r on r.Id = c.RaceId
                                    LEFT JOIN AppearanceFeature af on af.Id = c.AppearanceFeatureId
+                                   LEFT JOIN Alignment a on a.Id = c.AlignmentId
                                    LEFT JOIN InteractionTrait it on it.Id = c.InteractionTraitId
                                    LEFT JOIN Talent t on t.Id = c.TalentId
                                    LEFT JOIN Mannerism m on m.Id = c.MannerismId
-                            WHERE FirebaseUserId = @firebaseUserId";
+                            WHERE up.FirebaseUserId = @firebaseUserId";
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
 
                     var reader = cmd.ExecuteReader();
@@ -61,19 +63,21 @@ namespace Randomizer.Repositories
                 {
                     cmd.CommandText = @"
                             SELECT c.Id, c.UserId, c.Name AS CharacterName, c.Age, c.GenderId, c.RaceId, c.AppearanceFeatureId,
-                                   c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
+                                   c.AlignmentId, c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
                                    up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName,
                                    g.Name AS GenderName, r.Name AS RaceName, af.Description AS AppearanceFeatureDescription,
-                                   it.Name AS InteractionTraitName, t.Description AS TalentDescription, m.Description AS MannerismDescription
+                                   a.Name AS AlignmentName, it.Name AS InteractionTraitName, 
+                                   t.Description AS TalentDescription, m.Description AS MannerismDescription
                             FROM Character c
                                    LEFT JOIN UserProfile up on up.Id = c.UserId
                                    LEFT JOIN Gender g on g.Id = c.GenderId
                                    LEFT JOIN Race r on r.Id = c.RaceId
                                    LEFT JOIN AppearanceFeature af on af.Id = c.AppearanceFeatureId
+                                   LEFT JOIN Alignment a on a.Id = c.AlignmentId
                                    LEFT JOIN InteractionTrait it on it.Id = c.InteractionTraitId
                                    LEFT JOIN Talent t on t.Id = c.TalentId
                                    LEFT JOIN Mannerism m on m.Id = c.MannerismId
-                            WHERE Id = @id";
+                            WHERE c.Id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);
 
                     var reader = cmd.ExecuteReader();
@@ -101,17 +105,18 @@ namespace Randomizer.Repositories
                     cmd.CommandText = @"
                                 INSERT INTO Character ( 
                                             UserId, Name, Age, GenderId, RaceId, AppearanceFeatureId,
-                                            InteractionTraitId, TalentId, MannerismId, Notes )
+                                            AlignmentId, InteractionTraitId, TalentId, MannerismId, Notes )
                                 OUTPUT INSERTED.ID
                                 VALUES (
                                             @UserId, @Name, @Age, @GenderId, @RaceId, @AppearanceFeatureId,
-                                            @InteractionTraitId, @TalentId, @MannerismId, @Notes )";
+                                            @AlignmentId, @InteractionTraitId, @TalentId, @MannerismId, @Notes )";
                     DbUtils.AddParameter(cmd, "@UserId", character.UserId);
                     DbUtils.AddParameter(cmd, "@Name", character.Name);
                     DbUtils.AddParameter(cmd, "@Age", character.Age);
                     DbUtils.AddParameter(cmd, "@GenderId", character.GenderId);
                     DbUtils.AddParameter(cmd, "@RaceId", character.RaceId);
                     DbUtils.AddParameter(cmd, "@AppearanceFeatureId", character.AppearanceFeatureId);
+                    DbUtils.AddParameter(cmd, "@AlignmentId", character.AlignmentId);
                     DbUtils.AddParameter(cmd, "@InteractionTraitId", character.InteractionTraitId);
                     DbUtils.AddParameter(cmd, "@TalentId", character.TalentId);
                     DbUtils.AddParameter(cmd, "@MannerismId", character.MannerismId);
@@ -121,6 +126,8 @@ namespace Randomizer.Repositories
                 }
             }
         }
+
+
 
         public void UpdateCharacter(Character character)
         {
@@ -137,6 +144,7 @@ namespace Randomizer.Repositories
                                     GenderId = @GenderId,
                                     RaceId = @RaceId,
                                     AppearanceFeatureId = @AppearanceFeatureId,
+                                    AlignmentId = @AlignmentId,
                                     InteractionTraitId = @InteractionTraitId,
                                     TalentId = @TalentId,
                                     MannerismId = @MannerismId,
@@ -148,6 +156,7 @@ namespace Randomizer.Repositories
                     DbUtils.AddParameter(cmd, "@GenderId", character.GenderId);
                     DbUtils.AddParameter(cmd, "@RaceId", character.RaceId);
                     DbUtils.AddParameter(cmd, "@AppearanceFeatureId", character.AppearanceFeatureId);
+                    DbUtils.AddParameter(cmd, "@AlignmentId", character.AlignmentId);
                     DbUtils.AddParameter(cmd, "@InteractionTraitId", character.InteractionTraitId);
                     DbUtils.AddParameter(cmd, "@TalentId", character.TalentId);
                     DbUtils.AddParameter(cmd, "@MannerismId", character.MannerismId);
@@ -211,6 +220,13 @@ namespace Randomizer.Repositories
                 {
                     Id = DbUtils.GetInt(reader, "AppearanceFeatureId"),
                     Description = DbUtils.GetString(reader, "AppearanceFeatureDescription")
+                },
+                AlignmentId = DbUtils.GetInt(reader, "AlignmentId"),
+                Alignment = new Alignment()
+                {
+                    Id = DbUtils.GetInt(reader, "AlignmentId"),
+                    Name = DbUtils.GetString(reader, "AlignmentName")
+
                 },
                 InteractionTraitId = DbUtils.GetInt(reader, "InteractionTraitId"),
                 InteractionTrait = new InteractionTrait()
