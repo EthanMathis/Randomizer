@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Randomizer.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CharacterController : ControllerBase
@@ -50,6 +50,13 @@ namespace Randomizer.Controllers
             {
                 return NotFound();
             }
+            return Ok(character);
+        }
+
+        [HttpGet("random/")]
+        public IActionResult GetRandomCharacter()
+        {
+            var character = _characterRepository.RandomCharacter();
             return Ok(character);
         }
 
