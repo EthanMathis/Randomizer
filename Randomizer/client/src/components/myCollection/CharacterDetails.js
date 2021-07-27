@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router";
-import { Card, CardBody, Button } from "reactstrap";
-import { ButtonGroup, CardHeader, CardText, CardTitle, Container } from "reactstrap/lib";
+import { Card, Button } from "reactstrap";
+import { ButtonGroup, CardText, CardTitle, Container } from "reactstrap/lib";
 import { deleteCharacter, getCharacterById } from "../../providers/characterManager";
 import { Spinner } from "reactstrap";
 
