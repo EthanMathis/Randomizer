@@ -22,7 +22,7 @@ namespace Randomizer.Repositories
                 {
                     cmd.CommandText = @"
                             SELECT c.Id, c.UserId, c.Name AS CharacterName, c.Age, c.GenderId, c.RaceId, c.AppearanceFeatureId,
-                                   c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
+                                   c.AlignmentId, c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
                                    up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName,
                                    g.Name AS GenderName, r.Name AS RaceName, af.Description AS AppearanceFeatureDescription,
                                    a.Name AS AlignmentName, it.Name AS InteractionTraitName, 
@@ -341,7 +341,6 @@ namespace Randomizer.Repositories
                 {
                     Id = DbUtils.GetInt(reader, "AlignmentId"),
                     Name = DbUtils.GetString(reader, "AlignmentName")
-
                 },
                 InteractionTraitId = DbUtils.GetInt(reader, "InteractionTraitId"),
                 InteractionTrait = new InteractionTrait()
