@@ -10,5 +10,6 @@ namespace Randomizer.Repositories
         List<Character> GetAllCharactersByUserId(string firebaseUserId);
         Character GetCharacterById(int id);
         void UpdateCharacter(Character character);
+        Character RandomCharacter();
     }
 }

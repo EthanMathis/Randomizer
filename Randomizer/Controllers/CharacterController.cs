@@ -53,6 +53,13 @@ namespace Randomizer.Controllers
             return Ok(character);
         }
 
+        [HttpGet("random/")]
+        public IActionResult GetRandomCharacter()
+        {
+            var character = _characterRepository.RandomCharacter();
+            return Ok(character);
+        }
+
         // POST api/<CharacterController>
         [HttpPost]
         public IActionResult SaveCharacter(Character character)

@@ -1,7 +1,9 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
+import CharacterList from "../components/myCollection/CharacterList";
 import Register from "./Register";
+import CharacterDetails from "./myCollection/CharacterDetails";
 
 const ApplicationViews = ({ isLoggedIn }) => {
 
@@ -9,9 +11,12 @@ const ApplicationViews = ({ isLoggedIn }) => {
         <main>
             <Switch>
                 <Route path="/" exact>
-                    {isLoggedIn ? "Hello World" : <Redirect to="/login" />}
+                    {isLoggedIn ? <CharacterList /> : <Redirect to="/login" />}
                 </Route>
 
+                <Route path="/:id" exact>
+                    {isLoggedIn ? <CharacterDetails /> : <Redirect to="/login" />}
+                </Route>
 
                 <Route path="/login">
                     <Login />
