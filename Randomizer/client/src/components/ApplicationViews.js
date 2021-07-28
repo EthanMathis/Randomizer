@@ -1,9 +1,10 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
-import CharacterList from "../components/myCollection/CharacterList";
 import Register from "./Register";
+import CharacterList from "../components/myCollection/CharacterList";
 import CharacterDetails from "./myCollection/CharacterDetails";
+import RandomCharacter from "./randomizer/RandomCharacterGenerator";
 
 const ApplicationViews = ({ isLoggedIn }) => {
 
@@ -14,8 +15,12 @@ const ApplicationViews = ({ isLoggedIn }) => {
                     {isLoggedIn ? <CharacterList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/:id" exact>
+                <Route path="/:id(\d+)" exact>
                     {isLoggedIn ? <CharacterDetails /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/random" exact>
+                    {isLoggedIn ? <RandomCharacter /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">

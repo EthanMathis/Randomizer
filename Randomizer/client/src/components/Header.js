@@ -31,7 +31,7 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/">My Collection</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/generator">Generator</NavLink>
+                                    <NavLink tag={RRNavLink} to="/random">Generator</NavLink>
                                 </NavItem>
                             </>
                         }
