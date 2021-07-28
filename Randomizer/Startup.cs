@@ -32,7 +32,9 @@ namespace Randomizer
 
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<ICharacterRepository, CharacterRepository>();
-
+            services.AddTransient<IAlignmentRepository, AlignmentRepository>();
+            services.AddTransient<IRaceRepository, RaceRepository>();
+            services.AddTransient<IGenderRepository, GenderRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
