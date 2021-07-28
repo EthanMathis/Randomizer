@@ -20,7 +20,7 @@ const App = () => {
   //  Then it will be set to true or false by the "onLoginStatusChange" function
   if (isLoggedIn === null) {
     // Until we know whether or not the user is logged in or not, just show a spinner
-    return <Spinner className="app-spinner dark" />;
+    return <Spinner style={{ width: '5rem', height: '5rem' }} type="grow" />;
   }
 
   return (

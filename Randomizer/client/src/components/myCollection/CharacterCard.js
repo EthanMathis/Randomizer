@@ -7,15 +7,15 @@ const CharacterCard = ({ character }) => {
 
     return (
 
-        <Card body outline color="success" className="m-3 p-3">
+        <Card body outline color="success" className="m-3 p-3 w-75">
             <CardBody>
                 <Link color="#198754" to={`/${character.id}`}>
                     <CardTitle tag="h3">{character.name}</CardTitle>
                 </Link>
                 <CardText>
-                    <p>Race: {character.race.name}</p>
-                    <p>Gender: {character.gender.name}</p>
-                    <p>Age: {character.age}</p>
+                    <p><strong>Alignment</strong>: {character.alignment.name}</p>
+                    <p><strong>Race</strong>: {character.race.name}</p>
+                    <p><strong>Gender</strong>: {character.gender.name}</p>
                 </CardText>
             </CardBody>
         </Card>

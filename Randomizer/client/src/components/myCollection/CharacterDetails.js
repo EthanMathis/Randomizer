@@ -27,7 +27,7 @@ const CharacterDetails = () => {
     }, [])
 
     if (character == {} || character == undefined) {
-        return <Spinner className="app-spinner dark" />;
+        return <Spinner style={{ width: '5rem', height: '5rem' }} type="grow" />;
     }
 
     return (
