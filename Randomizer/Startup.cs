@@ -35,6 +35,10 @@ namespace Randomizer
             services.AddTransient<IAlignmentRepository, AlignmentRepository>();
             services.AddTransient<IRaceRepository, RaceRepository>();
             services.AddTransient<IGenderRepository, GenderRepository>();
+            services.AddTransient<IAppearanceFeatureRepository, AppearanceFeatureRepository>();
+            services.AddTransient<IInteractionTraitRepository, InteractionTraitRepository>();
+            services.AddTransient<IMannerismRepository, MannerismRepository>();
+            services.AddTransient<ITalentRepository, TalentRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

@@ -5,6 +5,7 @@ import Register from "./Register";
 import CharacterList from "../components/myCollection/CharacterList";
 import CharacterDetails from "./myCollection/CharacterDetails";
 import RandomCharacter from "./randomizer/RandomCharacterGenerator";
+import CharacterEditForm from "./myCollection/CharacterEditForm";
 
 const ApplicationViews = ({ isLoggedIn }) => {
 
@@ -21,6 +22,10 @@ const ApplicationViews = ({ isLoggedIn }) => {
 
                 <Route path="/random" exact>
                     {isLoggedIn ? <RandomCharacter /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/edit/:id(\d+)" exact>
+                    {isLoggedIn ? <CharacterEditForm /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">
