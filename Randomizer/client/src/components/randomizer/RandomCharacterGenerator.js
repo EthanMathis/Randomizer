@@ -85,7 +85,7 @@ const RandomCharacter = () => {
         }
         console.log(newUserCharacter);
         saveCharacter(newUserCharacter)
-            .then(() => setIsLoading(!isLoading))
+            .then(() => setIsLoading(true))
             .then(() => history.push("/"))
     }
 

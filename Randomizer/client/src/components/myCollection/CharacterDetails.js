@@ -4,6 +4,8 @@ import { Card, Button } from "reactstrap";
 import { ButtonGroup, CardText, CardTitle, Container } from "reactstrap/lib";
 import { deleteCharacter, getCharacterById } from "../../providers/characterManager";
 import { Spinner } from "reactstrap";
+import { Link } from "react-router-dom";
+
 
 
 const CharacterDetails = () => {
@@ -50,7 +52,9 @@ const CharacterDetails = () => {
                     <p className="text-start mx-4"><strong>Notes</strong>: {character.notes}</p>
                 </CardText>
                 <ButtonGroup size="sm">
-                    <Button className="btn btn-success">Edit</Button>
+                    <Link to={`/edit/${character.id}`}>
+                        <Button className="btn btn-success">Edit</Button>
+                    </Link>
                     <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button>
                 </ButtonGroup>
             </Card>
