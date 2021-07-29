@@ -19,48 +19,41 @@ const RandomCharacter = () => {
     })
     const [allAlignments, setAllAlignments] = useState([]);
     const [selectedAlignment, setSelectedAlignment] = useState();
-    // const [alignmentDropdown, setAlignmentDropdown] = useState(false);
 
     const [allRaces, setAllRaces] = useState([]);
     const [selectedRace, setSelectedRace] = useState();
-    // const [raceDropdown, setRaceDropdown] = useState(false);
 
     const [allGenders, setAllGenders] = useState([]);
     const [selectedGender, setSelectedGender] = useState();
-    // const [genderDropdown, setGenderDropdown] = useState(false);
 
     const [modal, setModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory()
 
 
-    // const toggleAlignment = () => setAlignmentDropdown(prevState => !prevState);
-    // const toggleRace = () => setRaceDropdown(prevState => !prevState);
-    // const toggleGender = () => setGenderDropdown(prevState => !prevState);
+    const toggleModal = () => setModal(!modal);
 
-
+    //* MAKES THE RANDOM CHARACTER SHEET SHOW THE USERS SELECTED OPTION (IF SELECTED)
     const handleAlignmentDropdown = (event) => {
         let userAlignment = {};
         userAlignment.id = event.target.id;
         userAlignment.name = event.target.innerText;
-        // console.log(event.target.innerText)
-        // console.log(event.target.id)
-        console.log(userAlignment);
         setSelectedAlignment(userAlignment);
     }
 
-    const toggleModal = () => setModal(!modal);
-
-    //* POPULATES ALL 3 DROPDOWNS FROM DB
-    const populateDropdowns = () => {
-        getAlignments().then((res) => setAllAlignments(res));
-        getRaces().then((res) => setAllRaces(res));
-        getGenders().then((res) => setAllGenders(res));
+    const handleRaceDropdown = (event) => {
+        let userRace = {};
+        userRace.id = event.target.id;
+        userRace.name = event.target.innerText;
+        setSelectedRace(userRace)
     }
 
-    useEffect(() => {
-        populateDropdowns()
-    }, [])
+    const handleGenderDropdown = (event) => {
+        let userGender = {};
+        userGender.id = event.target.id;
+        userGender.name = event.target.innerText;
+        setSelectedGender(userGender)
+    }
 
 
     //* RANDOM CHARACTER GENERATER FUNCTION 
@@ -76,13 +69,36 @@ const RandomCharacter = () => {
     }
     //* SAVES CHARACTER AND REDIRECTS TO CHARACTERLIST
     const handleSave = () => {
-        setIsLoading(true);
-        toggleModal();
-        saveCharacter(newCharacter)
-            .then(() => setIsLoading(false))
+        // setIsLoading(!isLoading);
+        let newUserCharacter = { ...newCharacter };
+        if (selectedAlignment !== undefined) {
+            newUserCharacter.alignmentId = selectedAlignment.id;
+            newUserCharacter.alignment = selectedAlignment;
+        }
+        if (selectedRace !== undefined) {
+            newUserCharacter.raceId = selectedRace.id;
+            newUserCharacter.race = selectedRace;
+        }
+        if (selectedGender !== undefined) {
+            newUserCharacter.genderId = selectedGender.id;
+            newUserCharacter.gender = selectedGender;
+        }
+        console.log(newUserCharacter);
+        saveCharacter(newUserCharacter)
+            .then(() => setIsLoading(!isLoading))
             .then(() => history.push("/"))
     }
 
+    //* POPULATES ALL 3 DROPDOWNS FROM DB
+    const populateDropdowns = () => {
+        getAlignments().then((res) => setAllAlignments(res));
+        getRaces().then((res) => setAllRaces(res));
+        getGenders().then((res) => setAllGenders(res));
+    }
+
+    useEffect(() => {
+        populateDropdowns()
+    }, [])
 
     return (
         <Container className="w-75 mt-4">
@@ -109,7 +125,7 @@ const RandomCharacter = () => {
                         <DropdownMenu>
                             <DropdownItem header>Choose a Race</DropdownItem>
                             {allRaces.map(race => {
-                                return <DropdownItem id={race.id} key={race.id}>{race.name}</DropdownItem>
+                                return <DropdownItem id={race.id} key={race.id} onClick={handleRaceDropdown}>{race.name}</DropdownItem>
                             })}
                         </DropdownMenu>
                     </Dropdown>
@@ -123,7 +139,7 @@ const RandomCharacter = () => {
                         <DropdownMenu>
                             <DropdownItem header>Choose a Gender</DropdownItem>
                             {allGenders.map(gender => {
-                                return <DropdownItem id={gender.id} key={gender.id}>{gender.name}</DropdownItem>
+                                return <DropdownItem id={gender.id} key={gender.id} onClick={handleGenderDropdown}>{gender.name}</DropdownItem>
                             })}
                         </DropdownMenu>
                     </Dropdown>
@@ -134,9 +150,9 @@ const RandomCharacter = () => {
                     <h3>Random Character Generator</h3>
                 </CardHeader>
                 <CardText>
-                    <p className="text-start mx-4 mt-4"><strong>Gender</strong>: {newCharacter.gender?.name}</p>
-                    <p className="text-start mx-4"><strong>Race</strong>: {newCharacter.race?.name}</p>
-                    <p className="text-start mx-4"><strong>Alignment</strong>: {selectedAlignment ? selectedAlignment.name : newCharacter.alignment?.name}</p>
+                    <p className="text-start mx-4 mt-4"><strong>Alignment</strong>: {selectedAlignment ? selectedAlignment.name : newCharacter.alignment?.name}</p>
+                    <p className="text-start mx-4"><strong>Race</strong>: {selectedRace ? selectedRace.name : newCharacter.race?.name}</p>
+                    <p className="text-start mx-4"><strong>Gender</strong>: {selectedGender ? selectedGender.name : newCharacter.gender?.name}</p>
                     <p className="text-start mx-4"><strong>Appearance Feature</strong>: {newCharacter.appearanceFeature?.description}</p>
                     <p className="text-start mx-4"><strong>Mannerism Detail</strong>: {newCharacter.mannerism?.description}</p>
                     <p className="text-start mx-4"><strong>Interaction Trait</strong>: {newCharacter.interactionTrait?.name}</p>
