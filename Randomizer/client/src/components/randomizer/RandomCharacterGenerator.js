@@ -62,10 +62,11 @@ const RandomCharacter = () => {
     }
     //* NAMES THE SAVED CHARACTER
     const handleInputChange = (event) => {
+        const value = event.target.value;
+        const key = event.target.id;
         let characterToBeSaved = { ...newCharacter };
-        characterToBeSaved.name = event.target.value;
+        characterToBeSaved[key] = value;
         setNewCharacter(characterToBeSaved);
-        console.log(newCharacter);
     }
     //* SAVES CHARACTER AND REDIRECTS TO CHARACTERLIST
     const handleSave = () => {
@@ -106,10 +107,11 @@ const RandomCharacter = () => {
                 <Col >
                     <Dropdown isOpen={toggle.ddAlignment} toggle={() => setToggle({ ddAlignment: !toggle.ddAlignment })}>
                         <DropdownToggle caret>
-                            Alignment
+                            {selectedAlignment ? selectedAlignment.name : <>Alignment</>}
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem header>Choose an Alignment</DropdownItem>
+                            <DropdownItem onClick={() => setSelectedAlignment()}>Random</DropdownItem>
                             {allAlignments.map(alignment => {
                                 return <DropdownItem id={alignment.id} key={alignment.id} onClick={handleAlignmentDropdown}>{alignment.name}</DropdownItem>
                             })}
@@ -120,10 +122,11 @@ const RandomCharacter = () => {
                 <Col>
                     <Dropdown isOpen={toggle.ddRace} toggle={() => setToggle({ ddRace: !toggle.ddRace })}>
                         <DropdownToggle caret>
-                            Race
+                            {selectedRace ? selectedRace.name : <>Race</>}
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem header>Choose a Race</DropdownItem>
+                            <DropdownItem onClick={() => setSelectedRace()}>Random</DropdownItem>
                             {allRaces.map(race => {
                                 return <DropdownItem id={race.id} key={race.id} onClick={handleRaceDropdown}>{race.name}</DropdownItem>
                             })}
@@ -134,10 +137,11 @@ const RandomCharacter = () => {
                 <Col>
                     <Dropdown isOpen={toggle.ddGender} toggle={() => setToggle({ ddGender: !toggle.ddGender })}>
                         <DropdownToggle caret>
-                            Gender
+                            {selectedGender ? selectedGender.name : <>Gender</>}
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem header>Choose a Gender</DropdownItem>
+                            <DropdownItem onClick={() => setSelectedGender()}>Random</DropdownItem>
                             {allGenders.map(gender => {
                                 return <DropdownItem id={gender.id} key={gender.id} onClick={handleGenderDropdown}>{gender.name}</DropdownItem>
                             })}
@@ -162,9 +166,11 @@ const RandomCharacter = () => {
             <Button className="btn btn-info mx-5 mt-3" onClick={getNewCharacter}>Get Character</Button>
             <Button className="btn btn-success mx-5 mt-3" onClick={toggleModal} disabled={isLoading}>Save Character</Button>
             <Modal isOpen={modal} toggle={toggleModal}>
-                <ModalHeader toggle={toggleModal}>Name Your New Character</ModalHeader>
+                <ModalHeader toggle={toggleModal}>Name, Age and Notes</ModalHeader>
                 <ModalBody>
-                    <Input type="text" placeholder="Name..." onChange={handleInputChange}></Input>
+                    <Input type="text" id="name" placeholder="Name..." onChange={handleInputChange} className="mb-2"></Input>
+                    <Input type="text" id="age" placeholder="Age..." onChange={handleInputChange} className="mb-2"></Input>
+                    <Input type="textarea" rows={3} id="notes" placeholder="Notes..." onChange={handleInputChange} ></Input>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="success" onClick={handleSave} disabled={isLoading}>Save Character</Button>{' '}
