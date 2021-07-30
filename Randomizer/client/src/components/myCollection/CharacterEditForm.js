@@ -182,14 +182,16 @@ const CharacterEditForm = () => {
                     </FormGroup>
                 </Row>
 
-                {/* //* DROPDOWN ROW 1 START */}
-                <Row>
+                <Label for="gender">Gender</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.gender?.name}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="gender">Gender</Label>
                             <Dropdown isOpen={toggle.ddGender} toggle={() => setToggle({ ddGender: !toggle.ddGender })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.gender?.name}
+                                    {selectedGender ? selectedGender.name : editCharacter.gender?.name}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose a Gender</DropdownItem>
@@ -200,12 +202,18 @@ const CharacterEditForm = () => {
                             </Dropdown>
                         </FormGroup>
                     </Col>
+                </Row>
+
+                <Label for="race">Race</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.race?.name}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="race">Race</Label>
                             <Dropdown isOpen={toggle.ddRace} toggle={() => setToggle({ ddRace: !toggle.ddRace })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.race?.name}
+                                    {selectedRace ? selectedRace.name : editCharacter.race?.name}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose a Race</DropdownItem>
@@ -216,12 +224,18 @@ const CharacterEditForm = () => {
                             </Dropdown>
                         </FormGroup>
                     </Col>
+                </Row>
+
+                <Label for="alignment">Alignment</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.alignment?.name}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="alignment">Alignment</Label>
                             <Dropdown isOpen={toggle.ddAlignment} toggle={() => setToggle({ ddAlignment: !toggle.ddAlignment })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.alignment?.name}
+                                    {selectedAlignment ? selectedAlignment.name : editCharacter.alignment?.name}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose an Alignment</DropdownItem>
@@ -233,16 +247,17 @@ const CharacterEditForm = () => {
                         </FormGroup>
                     </Col>
                 </Row>
-                {/* //* DROPDOWN ROW 1 END */}
 
-                {/* //* DROPDOWN ROW 2 START */}
-                <Row>
+                <Label for="appearanceFeature">Appearance Feature</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.appearanceFeature?.description}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="appearanceFeature">Appearance Feature</Label>
                             <Dropdown isOpen={toggle.ddAppearance} toggle={() => setToggle({ ddAppearance: !toggle.ddAppearance })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.appearanceFeature?.description}
+                                    {selectedAppearanceFeature ? selectedAppearanceFeature.description : editCharacter.appearanceFeature?.description}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose an Appearance Feature</DropdownItem>
@@ -253,12 +268,18 @@ const CharacterEditForm = () => {
                             </Dropdown>
                         </FormGroup>
                     </Col>
+                </Row>
+
+                <Label for="interactionTrait">Interaction Trait</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.interactionTrait?.name}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="interactionTrait">Interaction Trait</Label>
                             <Dropdown isOpen={toggle.ddInteraction} toggle={() => setToggle({ ddInteraction: !toggle.ddInteraction })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.interactionTrait?.name}
+                                    {selectedInteractionTrait ? selectedInteractionTrait.name : editCharacter.interactionTrait?.name}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose an Interaction Trait</DropdownItem>
@@ -270,16 +291,17 @@ const CharacterEditForm = () => {
                         </FormGroup>
                     </Col>
                 </Row>
-                {/* //* DROPDOWN ROW 2 END */}
 
-                {/* //* DROPDOWN ROW 3 START */}
-                <Row>
+                <Label for="mannerism">Mannerism</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.mannerism?.description}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="mannerism">Mannerism</Label>
                             <Dropdown isOpen={toggle.ddMannerism} toggle={() => setToggle({ ddMannerism: !toggle.ddMannerism })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.mannerism?.description}
+                                    {selectedMannerism ? selectedMannerism.description : editCharacter.mannerism?.description}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose a Mannerism</DropdownItem>
@@ -290,12 +312,18 @@ const CharacterEditForm = () => {
                             </Dropdown>
                         </FormGroup>
                     </Col>
+                </Row>
+
+                <Label for="talent">Talent</Label>
+                <Row className="border rounded">
+                    <Col>
+                        <p>{editCharacter.talent?.description}</p>
+                    </Col>
                     <Col>
                         <FormGroup>
-                            <Label for="talent">Talent</Label>
                             <Dropdown isOpen={toggle.ddTalent} toggle={() => setToggle({ ddTalent: !toggle.ddTalent })}>
                                 <DropdownToggle caret>
-                                    {editCharacter.talent?.description}
+                                    {selectedTalent ? selectedTalent.description : editCharacter.talent?.description}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem header>Choose a Talent</DropdownItem>
@@ -307,7 +335,6 @@ const CharacterEditForm = () => {
                         </FormGroup>
                     </Col>
                 </Row>
-                {/* //* DROPDOWN ROW 3 END */}
 
                 <FormGroup>
                     <Label for="notes">Notes</Label>

@@ -224,7 +224,7 @@ namespace Randomizer.Repositories
                                 OUTPUT INSERTED.ID
                                 VALUES (
                                             @UserId, @Name, @Age, @GenderId, @RaceId, @AppearanceFeatureId,
-                                            @AlignmentId, @InteractionTraitId, @TalentId, @MannerismId, '' )";
+                                            @AlignmentId, @InteractionTraitId, @TalentId, @MannerismId, @Notes )";
                     DbUtils.AddParameter(cmd, "@UserId", character.UserId);
                     DbUtils.AddParameter(cmd, "@Name", character.Name);
                     DbUtils.AddParameter(cmd, "@Age", character.Age);
@@ -235,6 +235,7 @@ namespace Randomizer.Repositories
                     DbUtils.AddParameter(cmd, "@InteractionTraitId", character.InteractionTraitId);
                     DbUtils.AddParameter(cmd, "@TalentId", character.TalentId);
                     DbUtils.AddParameter(cmd, "@MannerismId", character.MannerismId);
+                    DbUtils.AddParameter(cmd, "@Notes", character.Notes);
 
                     character.Id = (int)cmd.ExecuteScalar();
                 }

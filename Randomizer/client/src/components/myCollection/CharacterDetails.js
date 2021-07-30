@@ -52,10 +52,8 @@ const CharacterDetails = () => {
                     <p className="text-start mx-4"><strong>Notes</strong>: {character.notes}</p>
                 </CardText>
                 <ButtonGroup size="sm">
-                    <Link to={`/edit/${character.id}`}>
-                        <Button className="btn btn-success">Edit</Button>
-                    </Link>
-                    <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button>
+                    <Button className="btn btn-success mx-5 mt-3" onClick={() => history.push(`/edit/${character.id}`)}>Edit</Button>
+                    <Button className="btn btn-danger mx-5 mt-3" onClick={handleDelete}>Delete</Button>
                 </ButtonGroup>
             </Card>
         </Container>
