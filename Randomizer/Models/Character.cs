@@ -35,6 +35,9 @@ namespace Randomizer.Models
         public int MannerismId { get; set; }
         public Mannerism Mannerism { get; set; }
 
+        public int PlotHookId { get; set; }
+        public PlotHook PlotHook { get; set; }
+
         public string Notes { get; set; }
     }
 }

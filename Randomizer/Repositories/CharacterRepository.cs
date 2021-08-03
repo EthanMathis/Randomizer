@@ -22,11 +22,12 @@ namespace Randomizer.Repositories
                 {
                     cmd.CommandText = @"
                             SELECT c.Id, c.UserId, c.Name AS CharacterName, c.Age, c.GenderId, c.RaceId, c.AppearanceFeatureId,
-                                   c.AlignmentId, c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
+                                   c.AlignmentId, c.InteractionTraitId, c.TalentId, c.MannerismId, c.PlotHookId, c.Notes,
                                    up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName,
                                    g.Name AS GenderName, r.Name AS RaceName, af.Description AS AppearanceFeatureDescription,
                                    a.Name AS AlignmentName, it.Name AS InteractionTraitName, 
-                                   t.Description AS TalentDescription, m.Description AS MannerismDescription
+                                   t.Description AS TalentDescription, m.Description AS MannerismDescription, 
+                                   ph.Description AS PlotHookDescription 
                             FROM Character c
                                    LEFT JOIN UserProfile up on up.Id = c.UserId
                                    LEFT JOIN Gender g on g.Id = c.GenderId
@@ -36,6 +37,7 @@ namespace Randomizer.Repositories
                                    LEFT JOIN InteractionTrait it on it.Id = c.InteractionTraitId
                                    LEFT JOIN Talent t on t.Id = c.TalentId
                                    LEFT JOIN Mannerism m on m.Id = c.MannerismId
+                                   LEFT JOIN PlotHook ph on ph.Id = c.PlotHookId
                             WHERE up.FirebaseUserId = @firebaseUserId";
                     DbUtils.AddParameter(cmd, "@firebaseUserId", firebaseUserId);
 
@@ -63,11 +65,12 @@ namespace Randomizer.Repositories
                 {
                     cmd.CommandText = @"
                             SELECT c.Id, c.UserId, c.Name AS CharacterName, c.Age, c.GenderId, c.RaceId, c.AppearanceFeatureId,
-                                   c.AlignmentId, c.InteractionTraitId, c.TalentId, c.MannerismId, c.Notes,
+                                   c.AlignmentId, c.InteractionTraitId, c.TalentId, c.MannerismId, c.PlotHookId, c.Notes,
                                    up.FirebaseUserId, up.Email, up.DisplayName, up.FirstName, up.LastName,
                                    g.Name AS GenderName, r.Name AS RaceName, af.Description AS AppearanceFeatureDescription,
                                    a.Name AS AlignmentName, it.Name AS InteractionTraitName, 
-                                   t.Description AS TalentDescription, m.Description AS MannerismDescription
+                                   t.Description AS TalentDescription, m.Description AS MannerismDescription, 
+                                   ph.Description AS PlotHookDescription 
                             FROM Character c
                                    LEFT JOIN UserProfile up on up.Id = c.UserId
                                    LEFT JOIN Gender g on g.Id = c.GenderId
@@ -77,6 +80,7 @@ namespace Randomizer.Repositories
                                    LEFT JOIN InteractionTrait it on it.Id = c.InteractionTraitId
                                    LEFT JOIN Talent t on t.Id = c.TalentId
                                    LEFT JOIN Mannerism m on m.Id = c.MannerismId
+                                   LEFT JOIN PlotHook ph on ph.Id = c.PlotHookId
                             WHERE c.Id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);
 
@@ -125,11 +129,17 @@ namespace Randomizer.Repositories
 
                                         SELECT Mannerism.Id AS MannerismId, Mannerism.Description AS MannerismDescription
 	                                           FROM Mannerism 
-	                                           WHERE Mannerism.Id = FLOOR(RAND()*(17)+1);
+	                                           WHERE Mannerism.Id = FLOOR(RAND()*(16)+1);
 
                                         SELECT Talent.Id AS TalentId, Talent.Description AS TalentDescription
 	                                           FROM Talent 
-	                                           WHERE Talent.Id = FLOOR(RAND()*(17)+1);";
+	                                           WHERE Talent.Id = FLOOR(RAND()*(17)+1);
+
+                                        SELECT PlotHook.Id AS PlotHookId, PlotHook.Description AS PlotHookDescription
+                                               FROM PlotHook
+                                               WHERE PlotHook.Id = FLOOR(RAND()*(21)+1);";
+
+                            
 
                     var reader = cmd.ExecuteReader();
 
@@ -204,6 +214,16 @@ namespace Randomizer.Repositories
                             Description = DbUtils.GetString(reader, "TalentDescription")
                         };
                     }
+                    reader.NextResult();
+                    while (reader.Read())
+                    {
+                        character.PlotHookId = DbUtils.GetInt(reader, "PlotHookId");
+                        character.PlotHook = new PlotHook()
+                        {
+                            Id = DbUtils.GetInt(reader, "PlotHookId"),
+                            Description = DbUtils.GetString(reader, "PlotHookDescription")
+                        };
+                    }
                     reader.Close();
                     return character;
                 }
@@ -220,11 +240,11 @@ namespace Randomizer.Repositories
                     cmd.CommandText = @"
                                 INSERT INTO Character ( 
                                             UserId, Name, Age, GenderId, RaceId, AppearanceFeatureId,
-                                            AlignmentId, InteractionTraitId, TalentId, MannerismId, Notes )
+                                            AlignmentId, InteractionTraitId, TalentId, MannerismId, PlotHookId, Notes )
                                 OUTPUT INSERTED.ID
                                 VALUES (
                                             @UserId, @Name, @Age, @GenderId, @RaceId, @AppearanceFeatureId,
-                                            @AlignmentId, @InteractionTraitId, @TalentId, @MannerismId, @Notes )";
+                                            @AlignmentId, @InteractionTraitId, @TalentId, @MannerismId, @PlotHookId, @Notes )";
                     DbUtils.AddParameter(cmd, "@UserId", character.UserId);
                     DbUtils.AddParameter(cmd, "@Name", character.Name);
                     DbUtils.AddParameter(cmd, "@Age", character.Age);
@@ -235,7 +255,9 @@ namespace Randomizer.Repositories
                     DbUtils.AddParameter(cmd, "@InteractionTraitId", character.InteractionTraitId);
                     DbUtils.AddParameter(cmd, "@TalentId", character.TalentId);
                     DbUtils.AddParameter(cmd, "@MannerismId", character.MannerismId);
+                    DbUtils.AddParameter(cmd, "@PlotHookId", character.PlotHookId);
                     DbUtils.AddParameter(cmd, "@Notes", character.Notes);
+
 
                     character.Id = (int)cmd.ExecuteScalar();
                 }
@@ -263,6 +285,7 @@ namespace Randomizer.Repositories
                                     InteractionTraitId = @InteractionTraitId,
                                     TalentId = @TalentId,
                                     MannerismId = @MannerismId,
+                                    PlotHookId = @PlotHookId,
                                     Notes = @Notes
                                 WHERE Id = @id";
 
@@ -275,6 +298,7 @@ namespace Randomizer.Repositories
                     DbUtils.AddParameter(cmd, "@InteractionTraitId", character.InteractionTraitId);
                     DbUtils.AddParameter(cmd, "@TalentId", character.TalentId);
                     DbUtils.AddParameter(cmd, "@MannerismId", character.MannerismId);
+                    DbUtils.AddParameter(cmd, "@PlotHookId", character.PlotHookId);
                     DbUtils.AddParameter(cmd, "@Notes", character.Notes);
                     DbUtils.AddParameter(cmd, "@id", character.Id);
 
@@ -359,6 +383,12 @@ namespace Randomizer.Repositories
                 {
                     Id = DbUtils.GetInt(reader, "MannerismId"),
                     Description = DbUtils.GetString(reader, "MannerismDescription")
+                },
+                PlotHookId = DbUtils.GetInt(reader, "PlotHookId"),
+                PlotHook = new PlotHook()
+                {
+                    Id = DbUtils.GetInt(reader, "PlotHookId"),
+                    Description = DbUtils.GetString(reader, "PlotHookDescription")
                 },
                 Notes = DbUtils.GetString(reader, "Notes")
             };

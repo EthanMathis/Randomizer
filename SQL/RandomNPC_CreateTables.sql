@@ -1,10 +1,10 @@
 ﻿USE [master]
 
-IF db_id('RandomNPC') IS NULL
-	CREATE DATABASE [RandomNPC]
+IF db_id('Randomizer') IS NULL
+	CREATE DATABASE [Randomizer]
 GO
 
-use [RandomNPC]
+use [Randomizer]
 GO
 
 DROP TABLE IF EXISTS UserProfile;
@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS Alignment;
 DROP TABLE IF EXISTS Talent;
 DROP TABLE IF EXISTS Mannerism;
 DROP TABLE IF EXISTS InteractionTrait;
+DROP TABLE IF EXISTS PlotHook;
 
 
 CREATE TABLE [UserProfile] (
@@ -72,6 +73,12 @@ CREATE TABLE [InteractionTrait] (
 )
 GO
 
+CREATE TABLE [PlotHook] (
+  [Id] INTEGER NOT NULL PRIMARY KEY IDENTITY,
+  [Description] NVARCHAR(MAX) NOT NULL,
+)
+GO
+
 
 CREATE TABLE [Character] (
   [Id] INTEGER NOT NULL PRIMARY KEY IDENTITY,
@@ -85,6 +92,7 @@ CREATE TABLE [Character] (
   [InteractionTraitId] INTEGER NOT NULL,
   [TalentId] INTEGER NOT NULL,
   [MannerismId] INTEGER NOT NULL,
+  [PlotHookId] INTEGER NOT NULL,
   [Notes] NVARCHAR(MAX) NOT NULL,
 
   CONSTRAINT FK_Character_UserProfile FOREIGN KEY (UserId) REFERENCES UserProfile(Id),
@@ -95,5 +103,6 @@ CREATE TABLE [Character] (
   CONSTRAINT FK_Character_InteractionTrait FOREIGN KEY (InteractionTraitId) REFERENCES InteractionTrait(Id),
   CONSTRAINT FK_Character_Talent FOREIGN KEY (TalentId) REFERENCES Talent(Id),
   CONSTRAINT FK_Character_Mannerism FOREIGN KEY (MannerismId) REFERENCES Mannerism(Id),
+  CONSTRAINT FK_Character_PlotHook FOREIGN KEY (PlotHookId) REFERENCES PlotHook(Id),
 )
 GO

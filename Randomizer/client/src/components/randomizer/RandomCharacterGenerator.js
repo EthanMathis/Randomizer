@@ -160,6 +160,7 @@ const RandomCharacter = () => {
                     <p className="text-start mx-4"><strong>Appearance Feature</strong>: {newCharacter.appearanceFeature?.description}</p>
                     <p className="text-start mx-4"><strong>Mannerism Detail</strong>: {newCharacter.mannerism?.description}</p>
                     <p className="text-start mx-4"><strong>Interaction Trait</strong>: {newCharacter.interactionTrait?.name}</p>
+                    <p className="text-start mx-4"><strong>Plot Hook</strong>: {newCharacter.plotHook?.description}</p>
                     <p className="text-start mx-4"><strong>Talent</strong>: {newCharacter.talent?.description}</p>
                 </CardText>
             </Card>

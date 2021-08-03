@@ -6,6 +6,7 @@ import CharacterList from "../components/myCollection/CharacterList";
 import CharacterDetails from "./myCollection/CharacterDetails";
 import RandomCharacter from "./randomizer/RandomCharacterGenerator";
 import CharacterEditForm from "./myCollection/CharacterEditForm";
+import '../styles/main.css'
 
 const ApplicationViews = ({ isLoggedIn }) => {
 
