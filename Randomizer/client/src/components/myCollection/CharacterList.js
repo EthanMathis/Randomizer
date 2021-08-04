@@ -4,14 +4,17 @@ import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router";
 import CharacterCard from "./CharacterCard";
 import { getCharacterList } from "../../providers/characterManager";
-import { Container } from "reactstrap";
-import { Col } from "reactstrap/lib";
+import { Container, Card } from "reactstrap";
+import { CardBody, CardText, Col } from "reactstrap/lib";
+import { Link } from "react-router-dom";
+import { Spinner } from "reactstrap/lib";
 
 const CharacterList = () => {
-    const [characters, setCharacters] = useState([]);
+    const [characters, setCharacters] = useState(null);
 
     const getList = () => {
-        getCharacterList().then((res) => setCharacters(res));
+        getCharacterList()
+            .then((res) => setCharacters(res))
     }
 
     useEffect(() => {
@@ -19,11 +22,26 @@ const CharacterList = () => {
     }, [])
 
     return (
-        <Container className="w-50">
-            <Col xs="auto">
-                {characters?.map((character) => {
-                    return <CharacterCard character={character} key={character.id} />
-                })}
+        <Container className="w-50 mt-5">
+            <Col xs="auto" className="w-75 mx-auto">
+                {characters === null ? <Spinner style={{ width: '5rem', height: '5rem' }} type="grow" />
+                    : characters.length > 0 ?
+                        characters?.map((character) => {
+                            return <CharacterCard character={character} key={character.id} />
+                        }) :
+                        <Card className="mt-5 p-3">
+                            <CardBody>
+                                <CardText>
+                                    <h2>
+                                        <strong>Uh-oh! Looks like you don't have any NPC's saved...
+                                            <br />
+                                            try out the
+                                            <Link to={"/random"}> Generator </Link>
+                                            to get started!</strong>
+                                    </h2>
+                                </CardText>
+                            </CardBody>
+                        </Card>}
             </Col>
         </Container>
     );

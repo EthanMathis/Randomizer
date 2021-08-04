@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardTitle, CardBody, Button } from 'reactstrap';
+import React from 'react';
+import { Card, CardTitle, CardBody } from 'reactstrap';
 import CardText from 'reactstrap/lib/CardText';
 import { Link } from "react-router-dom";
+import { Row, Col, Container } from 'reactstrap/lib';
+
 
 const CharacterCard = ({ character }) => {
 
     return (
-
-        <Card body outline color="success" className="m-3 p-3 w-75">
-            <CardBody>
-                <Link color="#198754" to={`/${character.id}`}>
-                    <CardTitle tag="h3">{character.name}</CardTitle>
-                </Link>
-                <CardText>
-                    <p><strong>Alignment</strong>: {character.alignment.name}</p>
-                    <p><strong>Race</strong>: {character.race.name}</p>
-                    <p><strong>Gender</strong>: {character.gender.name}</p>
-                </CardText>
-            </CardBody>
-        </Card>
+        <Container>
+            <Card body outline color="success" className="m-3 p-3" id="character-card">
+                <CardBody>
+                    <Link color="#198754" to={`/${character.id}`}>
+                        <CardTitle tag="h3">{character.name}</CardTitle>
+                    </Link>
+                    <CardText>
+                        <Row>
+                            <Col>
+                                <p><strong>Alignment</strong>: {character.alignment.name}</p>
+                                <p><strong>Race</strong>: {character.race.name}</p>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <p><strong>Gender</strong>: {character.gender.name}</p>
+                            </Col>
+                        </Row>
+                    </CardText>
+                </CardBody>
+            </Card >
+        </Container>
     )
 }
 

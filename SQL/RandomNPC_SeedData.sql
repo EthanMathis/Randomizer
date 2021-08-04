@@ -96,8 +96,7 @@ VALUES
   (13, 'Knows thieves’ cant'),
   (14, 'Skilled dancer'),
   (15, 'Knows a cantrip (Thaumaturgy, Prestidigitation or Druidcraft'),
-  (16, 'Exceptional storyteller'),
-  (17, 'Expert with a longbow');
+  (16, 'Exceptional storyteller');
 SET IDENTITY_INSERT [Talent] OFF
 
 
@@ -143,3 +142,31 @@ VALUES
   (12, 'Suspicious'),
   (13, 'Polite');
 SET IDENTITY_INSERT [InteractionTrait] OFF
+
+
+SET IDENTITY_INSERT [PlotHook] ON
+INSERT INTO [PlotHook]
+  ([Id], [Description])
+VALUES
+  (1, 'Is the leader of a local secret society or guild'),
+  (2, 'Is possessed by an evil spirit and can only control themselves during the day'),
+  (3, 'Challenges a PC to a duel (to the death is optional)'),
+  (4, 'Is secretly a vigilante and fights injustice by night'),
+  (5, 'Has been paid to sabotage the PC''s in some way'),
+  (6, 'Needs the party to deliver a magical trinket to a family member'),
+  (7, 'House was recently destroyed by a mysterious earthquake'),
+  (8, 'Recently woke up with a magical rune on their left arm'),
+  (9, 'House has been eaten by a giant purple worm. Further inspection reveals a complex cave system'),
+  (10, 'Has been tricked into wearing a cursed trinket'),
+  (11, 'Needs the party to deliver a precious book to the local witches coven'),
+  (12, 'Is in dire need of some Beholder blood'),
+  (13, 'Has fallen in love with a mermaid from the nearest water source'),
+  (14, 'Has recently obtained a map to a great treasure'),
+  (15, 'Is being pressured to work for a local gang and wishes to be free again'),
+  (16, 'Is spying on the players on behalf of a local guild or gang'),
+  (17, 'Is being haunted by a ghost'),
+  (18, 'Is looking for their lost sibling'),
+  (19, 'Is actually a doppleganger who killed this character and is now living their life'),
+  (20, 'Is openly a vampire'),
+  (21, 'suffers from lycanthropy');
+SET IDENTITY_INSERT [PlotHook] OFF

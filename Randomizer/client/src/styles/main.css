@@ -1,0 +1,50 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../images/BackgroundEdit7.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.nav-margin {
+    margin-bottom: 100px !important;
+}
+
+.card {
+    color: white;
+}
+
+#character-card {
+    height: 100%;
+    width: 100%;
+    background-image: url('../images/CardBackgroundHiRes.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#character-edit {
+    height: 100%;
+    width: 100%;
+    background-image: url('../images/editCardBackground4.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+#editform {
+    background-color: #343a40 !important;
+    width: 100%;
+    
+}
+
+.edit-form-input {
+    background-color: #343a40 !important;
+    color: white !important;
+}
+
+.form-group {
+    
+}

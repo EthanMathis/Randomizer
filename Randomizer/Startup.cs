@@ -39,6 +39,7 @@ namespace Randomizer
             services.AddTransient<IInteractionTraitRepository, InteractionTraitRepository>();
             services.AddTransient<IMannerismRepository, MannerismRepository>();
             services.AddTransient<ITalentRepository, TalentRepository>();
+            services.AddTransient<IPlotHookRepository, PlotHookRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

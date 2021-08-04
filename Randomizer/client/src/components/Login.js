@@ -17,13 +17,13 @@ export default function Login() {
     };
 
     return (
-        <Form onSubmit={loginSubmit} className="w-50 mt-5 p-2 border rounded mx-auto">
+        <Form onSubmit={loginSubmit} className="w-25 mt-5 mb-5 p-4 border rounded mx-auto">
             <fieldset>
-                <FormGroup className="m-3">
+                <FormGroup className="m-3 mx-auto">
                     <Label for="email">Email</Label>
                     <Input id="email" type="text" autoFocus onChange={e => setEmail(e.target.value)} />
                 </FormGroup>
-                <FormGroup className="m-3">
+                <FormGroup className="m-3 mx-auto">
                     <Label for="password">Password</Label>
                     <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
                 </FormGroup>

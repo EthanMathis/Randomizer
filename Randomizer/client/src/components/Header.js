@@ -10,6 +10,8 @@ import {
     NavLink
 } from 'reactstrap';
 import { logout } from '../providers/authManager';
+import logo from "../images/IconFinalEdit.png"
+// import '../styles/main.css';
 
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,9 +20,9 @@ export default function Header({ isLoggedIn }) {
 
 
     return (
-        <div>
-            <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={RRNavLink} to="/" className="mx-2">Randomizer</NavbarBrand>
+        <div className="nav-margin">
+            <Navbar color="dark" dark expand="md" fixed="top">
+                <NavbarBrand tag={RRNavLink} to="/" className="mx-1"><img src={logo} alt="" width="50px" /></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
@@ -58,6 +60,6 @@ export default function Header({ isLoggedIn }) {
                     </Nav>
                 </Collapse>
             </Navbar>
-        </div>
+        </div >
     );
 }

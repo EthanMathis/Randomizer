@@ -27,11 +27,13 @@ const RandomCharacter = () => {
     const [selectedGender, setSelectedGender] = useState();
 
     const [modal, setModal] = useState(false);
+    const [nameModal, setNameModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const history = useHistory()
 
 
     const toggleModal = () => setModal(!modal);
+    const toggleNameModal = () => setNameModal(!nameModal);
 
     //* MAKES THE RANDOM CHARACTER SHEET SHOW THE USERS SELECTED OPTION (IF SELECTED)
     const handleAlignmentDropdown = (event) => {
@@ -85,6 +87,9 @@ const RandomCharacter = () => {
             newUserCharacter.gender = selectedGender;
         }
         console.log(newUserCharacter);
+        if (newUserCharacter.name == undefined) {
+            return window.alert("Please Name your character!")
+        }
         saveCharacter(newUserCharacter)
             .then(() => setIsLoading(true))
             .then(() => history.push("/"))
@@ -149,7 +154,7 @@ const RandomCharacter = () => {
                     </Dropdown>
                 </Col>
             </Row>
-            <Card body outline color="success">
+            <Card body outline color="success" id="character-card">
                 <CardHeader className="mt-3">
                     <h3>Random Character Generator</h3>
                 </CardHeader>
@@ -160,6 +165,7 @@ const RandomCharacter = () => {
                     <p className="text-start mx-4"><strong>Appearance Feature</strong>: {newCharacter.appearanceFeature?.description}</p>
                     <p className="text-start mx-4"><strong>Mannerism Detail</strong>: {newCharacter.mannerism?.description}</p>
                     <p className="text-start mx-4"><strong>Interaction Trait</strong>: {newCharacter.interactionTrait?.name}</p>
+                    <p className="text-start mx-4"><strong>Plot Hook</strong>: {newCharacter.plotHook?.description}</p>
                     <p className="text-start mx-4"><strong>Talent</strong>: {newCharacter.talent?.description}</p>
                 </CardText>
             </Card>
