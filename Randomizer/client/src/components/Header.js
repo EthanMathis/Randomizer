@@ -20,9 +20,9 @@ export default function Header({ isLoggedIn }) {
 
 
     return (
-        <div>
-            <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={RRNavLink} to="/" className="mx-2"><img src={logo} alt="" width="50px" /></NavbarBrand>
+        <div className="nav-margin">
+            <Navbar color="dark" dark expand="md" fixed="top">
+                <NavbarBrand tag={RRNavLink} to="/" className="mx-1"><img src={logo} alt="" width="50px" /></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>

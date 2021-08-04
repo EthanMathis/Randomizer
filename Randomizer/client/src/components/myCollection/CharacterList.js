@@ -22,7 +22,7 @@ const CharacterList = () => {
     }, [])
 
     return (
-        <Container className="w-50">
+        <Container className="w-50 mt-5">
             <Col xs="auto" className="w-75 mx-auto">
                 {characters === null ? <Spinner style={{ width: '5rem', height: '5rem' }} type="grow" />
                     : characters.length > 0 ?

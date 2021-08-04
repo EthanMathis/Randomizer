@@ -33,9 +33,9 @@ const CharacterDetails = () => {
     }
 
     return (
-        <Container className="w-50 mt-4">
-            <Button className="btn-info mb-2 d-flex" onClick={() => history.push("/")}>Back</Button>
-            <Card>
+        <Container className="w-50 mt-5">
+            <Button className="btn-success mb-2 d-flex" onClick={() => history.push("/")}>Back</Button>
+            <Card body outline color="success" id="character-card">
                 <CardTitle className="mt-3">
                     <h4>{character.name}</h4>
                 </CardTitle>
