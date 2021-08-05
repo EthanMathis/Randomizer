@@ -133,7 +133,7 @@ namespace Randomizer.Repositories
 
                                         SELECT Talent.Id AS TalentId, Talent.Description AS TalentDescription
 	                                           FROM Talent 
-	                                           WHERE Talent.Id = FLOOR(RAND()*(17)+1);
+	                                           WHERE Talent.Id = FLOOR(RAND()*(16)+1);
 
                                         SELECT PlotHook.Id AS PlotHookId, PlotHook.Description AS PlotHookDescription
                                                FROM PlotHook

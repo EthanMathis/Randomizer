@@ -29,13 +29,13 @@ const CharacterList = () => {
                         characters?.map((character) => {
                             return <CharacterCard character={character} key={character.id} />
                         }) :
-                        <Card className="mt-5 p-3">
+                        <Card className="landing-card mt-5 p-3">
                             <CardBody>
                                 <CardText>
-                                    <h2>
+                                    <h2 className="landing-card">
                                         <strong>Uh-oh! Looks like you don't have any NPC's saved...
                                             <br />
-                                            try out the
+                                            Try out the
                                             <Link to={"/random"}> Generator </Link>
                                             to get started!</strong>
                                     </h2>

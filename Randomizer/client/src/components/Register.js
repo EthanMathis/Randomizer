@@ -25,7 +25,7 @@ export default function Register() {
     };
 
     return (
-        <Form onSubmit={registerClick} className="w-50 mt-5 p-2 border rounded mx-auto">
+        <Form onSubmit={registerClick} className="w-50 mt-5 p-2 border rounded mx-auto" id="login-form">
             <fieldset>
                 <FormGroup className="m-2">
                     <Label htmlFor="firstName">First Name</Label>

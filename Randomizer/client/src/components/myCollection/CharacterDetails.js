@@ -65,7 +65,7 @@ const CharacterDetails = () => {
                     <Button className="btn btn-danger mx-5 mt-3" onClick={toggleModal}>Delete</Button>
                 </ButtonGroup>
             </Card>
-            <Modal isOpen={modal} toggle={toggleModal}>
+            <Modal isOpen={modal} toggle={toggleModal} className="myModal">
                 <ModalHeader toggle={toggleModal}>Delete {character.name}?</ModalHeader>
                 <ModalBody>
                     Do you really want to delete this character forever?

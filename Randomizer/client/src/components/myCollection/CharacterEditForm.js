@@ -116,20 +116,20 @@ const CharacterEditForm = () => {
             editedCharacter.gender = selectedGender;
         }
         if (selectedAppearanceFeature !== undefined) {
-            editCharacter.appearanceFeatureId = selectedAppearanceFeature.id;
-            editCharacter.appearanceFeature = selectedAppearanceFeature;
+            editedCharacter.appearanceFeatureId = selectedAppearanceFeature.id;
+            editedCharacter.appearanceFeature = selectedAppearanceFeature;
         }
         if (selectedInteractionTrait !== undefined) {
-            editCharacter.interactionTraitId = selectedInteractionTrait.id;
-            editCharacter.interactionTrait = selectedInteractionTrait;
+            editedCharacter.interactionTraitId = selectedInteractionTrait.id;
+            editedCharacter.interactionTrait = selectedInteractionTrait;
         }
         if (selectedMannerism !== undefined) {
-            editCharacter.mannerismId = selectedMannerism.id;
-            editCharacter.mannerism = selectedMannerism;
+            editedCharacter.mannerismId = selectedMannerism.id;
+            editedCharacter.mannerism = selectedMannerism;
         }
         if (selectedTalent !== undefined) {
-            editCharacter.talentId = selectedTalent.id;
-            editCharacter.talent = selectedTalent;
+            editedCharacter.talentId = selectedTalent.id;
+            editedCharacter.talent = selectedTalent;
         }
         updateCharacter(editedCharacter)
             .then(() => setIsLoading(true))
@@ -191,13 +191,13 @@ const CharacterEditForm = () => {
                     </Row>
                     <hr />
                     <div className="d-flex align-items-center">
-                        <div>Gender</div>
+                        <div className="col-2">Gender</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col>
                                 <p><strong>{editCharacter.gender?.name}</strong></p>
                             </Col>
                             <Col>
-                                <FormGroup>
+                                <FormGroup className="">
                                     <Dropdown isOpen={toggle.ddGender} toggle={() => setToggle({ ddGender: !toggle.ddGender })}>
                                         <DropdownToggle caret>
                                             {selectedGender ? selectedGender.name : editCharacter.gender?.name}
@@ -215,7 +215,7 @@ const CharacterEditForm = () => {
 
                     </div>
                     <div className="d-flex align-items-center">
-                        <div>Race</div>
+                        <div className="col-2">Race</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col>
                                 <strong><p>{editCharacter.race?.name}</p></strong>
@@ -239,7 +239,7 @@ const CharacterEditForm = () => {
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div>Alignment</div>
+                        <div className="col-2">Alignment</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col>
                                 <strong><p>{editCharacter.alignment?.name}</p></strong>
@@ -263,18 +263,34 @@ const CharacterEditForm = () => {
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div>Appearance <br /> Feature</div>
+                        <div className="col-2">Appearance <br /> Feature</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col>
                                 <strong><p>{editCharacter.appearanceFeature?.description}</p></strong>
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Dropdown isOpen={toggle.ddAppearance} toggle={() => setToggle({ ddAppearance: !toggle.ddAppearance })}>
+                                    <Dropdown isOpen={toggle.ddAppearance} direction="down" toggle={() => setToggle({ ddAppearance: !toggle.ddAppearance })}>
                                         <DropdownToggle caret>
                                             {selectedAppearanceFeature ? selectedAppearanceFeature.description : editCharacter.appearanceFeature?.description}
                                         </DropdownToggle>
-                                        <DropdownMenu>
+                                        <DropdownMenu
+                                            modifiers={{
+                                                setMaxHeight: {
+                                                    enabled: true,
+                                                    order: 890,
+                                                    fn: (data) => {
+                                                        return {
+                                                            ...data,
+                                                            styles: {
+                                                                ...data.styles,
+                                                                overflow: 'auto',
+                                                                maxHeight: 250,
+                                                            },
+                                                        };
+                                                    },
+                                                },
+                                            }}>
                                             <DropdownItem header>Choose an Appearance Feature</DropdownItem>
                                             {allAppearanceFeatures.map(appearance => {
                                                 return <DropdownItem id={appearance.id} key={appearance.id} onClick={handleAppearanceDropdown}>{appearance.description}</DropdownItem>
@@ -287,7 +303,7 @@ const CharacterEditForm = () => {
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div>Interaction <br /> Trait</div>
+                        <div className="col-2">Interaction <br /> Trait</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col>
                                 <strong><p>{editCharacter.interactionTrait?.name}</p></strong>
@@ -298,7 +314,22 @@ const CharacterEditForm = () => {
                                         <DropdownToggle caret>
                                             {selectedInteractionTrait ? selectedInteractionTrait.name : editCharacter.interactionTrait?.name}
                                         </DropdownToggle>
-                                        <DropdownMenu>
+                                        <DropdownMenu modifiers={{
+                                            setMaxHeight: {
+                                                enabled: true,
+                                                order: 890,
+                                                fn: (data) => {
+                                                    return {
+                                                        ...data,
+                                                        styles: {
+                                                            ...data.styles,
+                                                            overflow: 'auto',
+                                                            maxHeight: 250,
+                                                        },
+                                                    };
+                                                },
+                                            },
+                                        }}>
                                             <DropdownItem header>Choose an Interaction Trait</DropdownItem>
                                             {allInteractionTraits.map(interaction => {
                                                 return <DropdownItem id={interaction.id} key={interaction.id} onClick={handleInteractionDropdown}>{interaction.name}</DropdownItem>
@@ -311,7 +342,7 @@ const CharacterEditForm = () => {
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div>Mannerism</div>
+                        <div className="col-2">Mannerism</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col>
                                 <strong><p>{editCharacter.mannerism?.description}</p></strong>
@@ -322,7 +353,22 @@ const CharacterEditForm = () => {
                                         <DropdownToggle caret>
                                             {selectedMannerism ? selectedMannerism.description : editCharacter.mannerism?.description}
                                         </DropdownToggle>
-                                        <DropdownMenu>
+                                        <DropdownMenu modifiers={{
+                                            setMaxHeight: {
+                                                enabled: true,
+                                                order: 890,
+                                                fn: (data) => {
+                                                    return {
+                                                        ...data,
+                                                        styles: {
+                                                            ...data.styles,
+                                                            overflow: 'auto',
+                                                            maxHeight: 250,
+                                                        },
+                                                    };
+                                                },
+                                            },
+                                        }}>
                                             <DropdownItem header>Choose a Mannerism</DropdownItem>
                                             {allMannerisms.map(mannerism => {
                                                 return <DropdownItem id={mannerism.id} key={mannerism.id} onClick={handleMannerismDropdown}>{mannerism.description}</DropdownItem>
@@ -335,7 +381,7 @@ const CharacterEditForm = () => {
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div>Talent</div>
+                        <div className="col-2">Talent</div>
                         <Row className="border rounded m-2" id="editform">
                             <Col >
                                 <strong><p>{editCharacter.talent?.description}</p></strong>
@@ -346,7 +392,22 @@ const CharacterEditForm = () => {
                                         <DropdownToggle caret>
                                             {selectedTalent ? selectedTalent.description : editCharacter.talent?.description}
                                         </DropdownToggle>
-                                        <DropdownMenu>
+                                        <DropdownMenu modifiers={{
+                                            setMaxHeight: {
+                                                enabled: true,
+                                                order: 890,
+                                                fn: (data) => {
+                                                    return {
+                                                        ...data,
+                                                        styles: {
+                                                            ...data.styles,
+                                                            overflow: 'auto',
+                                                            maxHeight: 250,
+                                                        },
+                                                    };
+                                                },
+                                            },
+                                        }}>
                                             <DropdownItem header>Choose a Talent</DropdownItem>
                                             {allTalents.map(talent => {
                                                 return <DropdownItem id={talent.id} key={talent.id} onClick={handleTalentDropdown}>{talent.description}</DropdownItem>
@@ -359,7 +420,7 @@ const CharacterEditForm = () => {
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div>Plot Hook</div>
+                        <div className="col-2">Plot Hook</div>
                         <Row className="border rounded m-2" id="editform">
                             <FormGroup className="d-flex">
                                 <strong><p>{editCharacter.plotHook?.description}</p></strong>
@@ -367,12 +428,12 @@ const CharacterEditForm = () => {
                         </Row>
                     </div>
 
-                    <FormGroup className="m-2">
-                        <div className="d-flex align-items-center">
-                            <div>Notes</div>
+                    <div className="d-flex align-items-center">
+                        <div className="col-2">Notes</div>
+                        <FormGroup className="m-2" id="editform">
                             <Input className="edit-form-input" type="textarea" name="notes" id="notes" value={editCharacter.notes} onChange={handleInputChange} rows={6} />
-                        </div>
-                    </FormGroup>
+                        </FormGroup>
+                    </div>
                     <Row>
                         <ButtonGroup>
                             <Button className="btn btn-success mx-5 mt-3" disabled={isLoading} onClick={handleSaveEdit}>Save Changes</Button>

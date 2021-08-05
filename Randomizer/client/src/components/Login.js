@@ -17,7 +17,7 @@ export default function Login() {
     };
 
     return (
-        <Form onSubmit={loginSubmit} className="w-25 mt-5 mb-5 p-4 border rounded mx-auto">
+        <Form onSubmit={loginSubmit} className="w-25 mt-5 mb-5 p-4 border rounded mx-auto" id="login-form">
             <fieldset>
                 <FormGroup className="m-3 mx-auto">
                     <Label for="email">Email</Label>
@@ -31,7 +31,7 @@ export default function Login() {
                     <Button className="btn btn-sm btn-success">Login</Button>
                 </FormGroup>
                 <em className="m-3">
-                    Not registered? <Link to="register">Register</Link>
+                    Don't have an account? <Link to="register">Register here</Link>
                 </em>
             </fieldset>
         </Form >

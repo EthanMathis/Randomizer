@@ -171,12 +171,12 @@ const RandomCharacter = () => {
             </Card>
             <Button className="btn btn-info mx-5 mt-3" onClick={getNewCharacter}>Get Character</Button>
             <Button className="btn btn-success mx-5 mt-3" onClick={toggleModal} disabled={isLoading}>Save Character</Button>
-            <Modal isOpen={modal} toggle={toggleModal}>
+            <Modal isOpen={modal} toggle={toggleModal} className="myModal">
                 <ModalHeader toggle={toggleModal}>Name, Age and Notes</ModalHeader>
                 <ModalBody>
-                    <Input type="text" id="name" placeholder="Name..." onChange={handleInputChange} className="mb-2"></Input>
-                    <Input type="text" id="age" placeholder="Age..." onChange={handleInputChange} className="mb-2"></Input>
-                    <Input type="textarea" rows={3} id="notes" placeholder="Notes..." onChange={handleInputChange} ></Input>
+                    <Input type="text" id="name" placeholder="Name..." onChange={handleInputChange} className="edit-form-input mb-2"></Input>
+                    <Input type="text" id="age" placeholder="Age..." onChange={handleInputChange} className="edit-form-input mb-2"></Input>
+                    <Input type="textarea" rows={3} id="notes" placeholder="Notes..." onChange={handleInputChange} className="edit-form-input" ></Input>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="success" onClick={handleSave} disabled={isLoading}>Save Character</Button>{' '}
